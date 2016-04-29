@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/city"
         android:hint="City name.."
-        android:layout_marginTop="138dp"
+        android:singleLine="true"
+        android:imeOptions="actionNext"        android:layout_marginTop="138dp"
         android:layout_below="@+id/logout"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
@@ -25,6 +26,8 @@
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:id="@+id/course"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 

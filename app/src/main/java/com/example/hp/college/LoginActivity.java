@@ -23,6 +23,8 @@ public class LoginActivity extends AppCompatActivity {
     Button login;
     EditText username,password;
     TextView skiplogin;
+    private TextView register;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         username= (EditText) findViewById(R.id.username);
         password= (EditText) findViewById(R.id.password);
         skiplogin= (TextView) findViewById(R.id.logskip);
+        register= (TextView) findViewById(R.id.register);
         final SharedPreferences sharedpreferences = getSharedPreferences("Diet", Context.MODE_PRIVATE);
         if(sharedpreferences.getBoolean("logged",false))
         {
@@ -45,6 +48,14 @@ public class LoginActivity extends AppCompatActivity {
                 intent.putExtra("skipped",true);
                 startActivity(intent);
                 finish();
+
+            }
+        });
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
 
             }
         });

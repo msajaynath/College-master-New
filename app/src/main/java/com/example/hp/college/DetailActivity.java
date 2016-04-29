@@ -137,7 +137,7 @@ else
 
 
             }
-            List<Review> log = Review.find(Review.class, "college = ? and user <>?", id+"",userid+"");
+            List<Review> log = Review.find(Review.class, "college = ?", id+"");
             if(log.size()>0) {
                 String[] mobileArrayList=new String[log.size()];
 

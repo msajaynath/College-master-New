@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.AbstractList;
@@ -41,6 +42,7 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         ListView listview = (ListView) findViewById(R.id.searchlistview);
+        TextView noresult = (TextView) findViewById(R.id.noresult);
         Intent intent = getIntent();
         String city = intent.getStringExtra("city");
         String course = intent.getStringExtra("course");
@@ -49,6 +51,8 @@ public class ResultActivity extends AppCompatActivity {
             Log.d("city", city);
 
             final List<College> notes = College.findWithQuery(College.class, "Select * from College where city like '%" + city + "%' ");
+            if(notes.size()==0)
+                noresult.setVisibility(View.VISIBLE);
             for (College c : notes) {
                 List<Courses> courseList = Courses.findWithQuery(Courses.class, "Select * from Courses where college = ?", c.getId() + "");
                 String clist = "";
@@ -60,7 +64,8 @@ public class ResultActivity extends AppCompatActivity {
                 listItems.add(new ListItem(c.name, c.address, clist,c.getId(),c.rank));
                 // ListItem l=new ListItem();
             }
-
+            if(listItems.size()==0)
+                noresult.setVisibility(View.VISIBLE);
             MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(this, listItems);
             listview.setAdapter(adapter);
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -82,6 +87,9 @@ public class ResultActivity extends AppCompatActivity {
             Log.d("city", city);
 
             final List<College> notes = College.findWithQuery(College.class, "Select * from College where city like '%" + city + "%' ");
+            if(notes.size()==0)
+                noresult.setVisibility(View.VISIBLE);
+
             for (College c : notes) {
                 List<Courses> courseList = Courses.findWithQuery(Courses.class, "Select * from Courses where college = ?", c.getId() + "");
                 String clist = "";
@@ -95,7 +103,8 @@ public class ResultActivity extends AppCompatActivity {
                     listItems.add(new ListItem(c.name, c.address, clist,c.getId(),c.rank));
                 // ListItem l=new ListItem();
             }
-
+            if(listItems.size()==0)
+                noresult.setVisibility(View.VISIBLE);
             MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(this, listItems);
             listview.setAdapter(adapter);
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -116,6 +125,9 @@ public class ResultActivity extends AppCompatActivity {
         else   if (city.length()==0 && course.length()>=0) {
 
             final List<Courses> notes = Courses.findWithQuery(Courses.class, "Select * from Courses where name like '%" + course + "%'");
+            if(notes.size()==0)
+                noresult.setVisibility(View.VISIBLE);
+
             for (Courses c : notes) {
                 College col = College.findById(College.class, c.college.getId());
 
@@ -134,6 +146,9 @@ public class ResultActivity extends AppCompatActivity {
                 }
             });
 
+            if(listItems.size()==0)
+                    noresult.setVisibility(View.VISIBLE);
+            Log.d("DEBUG",listItems.size()+"  ");
             MySimpleArrayAdapter adapter = new MySimpleArrayAdapter(this, listItems);
             listview.setAdapter(adapter);
 
